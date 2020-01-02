@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class RestClient {
 
-	public static final String CONTENT_TYPE = "application/json;charset=UTF-8";
+	public static final String CONTENT_TYPE = "application/json";
 
 	public static RequestBuilder from(Object testInstance) {
 		return new RequestBuilder(testInstance);

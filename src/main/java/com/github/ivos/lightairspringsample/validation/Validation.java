@@ -37,6 +37,19 @@ public class Validation {
 	}
 
 	/**
+	 * Rejects further processing due to a validation error.
+	 * <p>
+	 * Calls verify method to stop processing.
+	 *
+	 * @param validationError validation error
+	 */
+	public void reject(ValidationError validationError) {
+		ValidationErrors validationErrors = new ValidationErrors();
+		validationErrors.add(validationError);
+		verify(validationErrors);
+	}
+
+	/**
 	 * Verify that no errors have been collected during previous validations.
 	 * <p>
 	 * If there are any errors, throw {@link ValidationException}.

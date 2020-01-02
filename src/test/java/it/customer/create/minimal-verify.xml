@@ -1,0 +1,12 @@
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../../dataset.xsd">
+
+	<!--existing Tax no-->
+	<customers id="@auto" version="@auto"/>
+
+
+	<!--created-->
+	<customers id="@any" version="0" name="n" tax_number="@null" maturity_interval="0" mobile="m" email="@null"
+	           web="@null" updated="@timestamp"/>
+
+</dataset>

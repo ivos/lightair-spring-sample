@@ -1,0 +1,29 @@
+{
+  "timestamp": "REPLACED",
+  "status": 422,
+  "error": "Unprocessable Entity",
+  "path": "/api/customers",
+  "errors": [
+    {
+      "path": "email",
+      "value": "",
+      "errorCode": "size must be between 1 and 50"
+    }, {
+      "path": "mobile",
+      "value": "",
+      "errorCode": "size must be between 1 and 30"
+    }, {
+      "path": "name",
+      "value": "",
+      "errorCode": "size must be between 1 and 100"
+    }, {
+      "path": "taxNumber",
+      "value": "",
+      "errorCode": "size must be between 4 and 100"
+    }, {
+      "path": "web",
+      "value": "",
+      "errorCode": "size must be between 1 and 50"
+    }
+  ]
+}

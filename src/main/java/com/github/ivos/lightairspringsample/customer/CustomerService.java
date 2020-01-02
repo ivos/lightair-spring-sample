@@ -21,11 +21,21 @@ public class CustomerService {
 	@Autowired
 	private Validation validation;
 
+	@Autowired
+	private CustomerMobileOrEmailValidator customerMobileOrEmailValidator;
+
+	@Autowired
+	private CustomerDuplicateTaxNoWrapper customerDuplicateTaxNoWrapper;
+
 	@Transactional
 	public Customer create(CustomerDtoCreate dto) {
 		validation.verifyBean(dto);
 		Customer customer = mapper.map(dto, Customer.class);
+		customerMobileOrEmailValidator.validate(customer);
 		customer.setUpdated(LocalDateTime.now());
-		return repo.save(customer);
+		return customerDuplicateTaxNoWrapper.wrap(
+				customer,
+				() -> repo.save(customer)
+		);
 	}
 }
