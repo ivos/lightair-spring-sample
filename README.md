@@ -28,3 +28,7 @@ Then press `CTRL-C` to stop the application.
 To re-create the database tables after a new migration has been introduced:
 
     mvnw -Pdb,recreate-db
+
+### Run System / Integration tests
+
+    mvnw -Pdb,it
