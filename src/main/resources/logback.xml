@@ -1,0 +1,6 @@
+<configuration scan="true">
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<logger name="com.github.ivos.lightairspringsample" level="debug"/>
+
+</configuration>
