@@ -2,12 +2,14 @@
          xsi:noNamespaceSchemaLocation="../../../dataset.xsd">
 
 	<!--existing Tax no-->
-	<customers id="@auto" version="@auto" name="@auto" tax_number="existing" maturity_interval="@auto" mobile="@auto"
-	           email="@auto" web="@auto" updated="@auto"/>
+	<customers id="@auto" version="@auto"/>
 
 
 	<!--created-->
-	<customers id="@auto" version="@auto" name="@auto" tax_number="@auto" maturity_interval="@auto" mobile="@auto"
-	           email="@auto" web="@auto" updated="@auto"/>
+	<customers id="@any" version="0"
+	           name="name 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345"
+	           tax_number="taxNumber 1234" maturity_interval="3421" mobile="mobile 12345678901234567890123"
+	           email="email 12345678901234567890123456789012345678901234"
+	           web="web 1234567890123456789012345678901234567890123456" updated="@timestamp"/>
 
 </dataset>

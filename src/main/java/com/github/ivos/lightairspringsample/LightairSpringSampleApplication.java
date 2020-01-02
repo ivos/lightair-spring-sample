@@ -9,5 +9,4 @@ public class LightairSpringSampleApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LightairSpringSampleApplication.class, args);
 	}
-
 }

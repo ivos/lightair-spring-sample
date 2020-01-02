@@ -23,6 +23,8 @@ To run the application from sources:
 
 Then press `CTRL-C` to stop the application.
 
+While the app is running, you can execute individual Integration tests.
+
 ### Re-create the database
 
 To re-create the database tables after a new migration has been introduced:
@@ -30,5 +32,7 @@ To re-create the database tables after a new migration has been introduced:
     mvnw -Pdb,recreate-db
 
 ### Run System / Integration tests
+
+To execute all Integration tests:
 
     mvnw -Pdb,it
