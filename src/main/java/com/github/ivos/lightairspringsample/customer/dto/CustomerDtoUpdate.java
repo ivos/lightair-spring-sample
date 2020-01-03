@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @ToString
-public class CustomerDtoCreate {
+public class CustomerDtoUpdate {
 
 	@NotNull
 	@Size(min = 1, max = 100)

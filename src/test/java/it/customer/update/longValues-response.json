@@ -1,0 +1,25 @@
+{
+  "timestamp": "REPLACED",
+  "status": 422,
+  "error": "Unprocessable Entity",
+  "path": "/api/customers/1374184902",
+  "errors": [
+    {
+      "path": "email",
+      "value": "email 12345678901234567890123456789012345678901234x",
+      "errorCode": "size must be between 1 and 50"
+    }, {
+      "path": "mobile",
+      "value": "mobile 12345678901234567890123x",
+      "errorCode": "size must be between 1 and 30"
+    }, {
+      "path": "name",
+      "value": "name 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345x",
+      "errorCode": "size must be between 1 and 100"
+    }, {
+      "path": "web",
+      "value": "web 1234567890123456789012345678901234567890123456x",
+      "errorCode": "size must be between 1 and 50"
+    }
+  ]
+}

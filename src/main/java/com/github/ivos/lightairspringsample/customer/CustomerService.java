@@ -1,6 +1,6 @@
 package com.github.ivos.lightairspringsample.customer;
 
-import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoCreate;
+import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoUpdate;
 import com.github.ivos.lightairspringsample.validation.Validation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,15 +33,20 @@ public class CustomerService {
 	@Autowired
 	private CustomerDuplicateTaxNoWrapper customerDuplicateTaxNoWrapper;
 
+	@Autowired
+	private EntityManager entityManager;
+
 	@Transactional
-	public Customer create(CustomerDtoCreate dto) {
+	public Customer create(CustomerDtoUpdate dto) {
 		validation.verifyBean(dto);
 		Customer customer = mapper.map(dto, Customer.class);
 		customerMobileOrEmailValidator.validate(customer);
+
 		customer.setUpdated(LocalDateTime.now());
+
 		return customerDuplicateTaxNoWrapper.wrap(
 				customer,
-				() -> repo.save(customer)
+				() -> repo.saveAndFlush(customer)
 		);
 	}
 
@@ -53,5 +59,26 @@ public class CustomerService {
 	public Customer get(Long id) {
 		return repo.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Customer id " + id + " not found"));
+	}
+
+	@Transactional
+	public void update(Long id, Long version, CustomerDtoUpdate dto) {
+		validation.verifyBean(dto);
+		Customer customer = get(id);
+		mapper.map(dto, customer);
+		customerMobileOrEmailValidator.validate(customer);
+
+		customer.setUpdated(LocalDateTime.now());
+
+		entityManager.detach(customer);
+		customer.setVersion(version);
+		customerDuplicateTaxNoWrapper.wrap(
+				customer,
+				() -> {
+					entityManager.merge(customer);
+					repo.flush();
+					return null;
+				}
+		);
 	}
 }

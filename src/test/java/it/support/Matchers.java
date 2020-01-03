@@ -94,13 +94,15 @@ public class Matchers {
 
 		private String normalize(String content) {
 			String json = JsonFormatter.format(content);
-			// pre-format first to ensure pretty error reporting of invalid JSON
-			if (null != replacer) {
-				json = replacer.apply(JsonPath.parse(json)).jsonString();
-				json = JsonFormatter.format(json); // re-format again after replacing
+			if (json != null && !"null".equals(json)) {
+				// pre-format first to ensure pretty error reporting of invalid JSON
+				if (null != replacer) {
+					json = replacer.apply(JsonPath.parse(json)).jsonString();
+					json = JsonFormatter.format(json); // re-format again after replacing
+				}
+				// strip trailing zeroes from effectively whole numbers
+				json = json.replaceAll("\\.0{1,3}(,\\r?\\n)", "$1");
 			}
-			// strip trailing zeroes from effectively whole numbers
-			json = json.replaceAll("\\.0{1,3}(,\\r?\\n)", "$1");
 			return json;
 		}
 

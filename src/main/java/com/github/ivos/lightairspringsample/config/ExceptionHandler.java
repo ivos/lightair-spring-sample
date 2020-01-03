@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.OptimisticLockException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
@@ -37,6 +38,14 @@ public class ExceptionHandler {
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		ErrorResponse errorResponse = createErrorResponse(request, status);
 		errorResponse.setError("Not Found");
+		return new ResponseEntity<>(errorResponse, status);
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler(OptimisticLockException.class)
+	@ResponseBody
+	ResponseEntity<ErrorResponse> handle(HttpServletRequest request, RuntimeException exception) {
+		HttpStatus status = HttpStatus.CONFLICT;
+		ErrorResponse errorResponse = createErrorResponse(request, status);
 		return new ResponseEntity<>(errorResponse, status);
 	}
 }

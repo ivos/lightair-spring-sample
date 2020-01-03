@@ -1,0 +1,13 @@
+{
+  "timestamp": "REPLACED",
+  "status": 422,
+  "error": "Unprocessable Entity",
+  "path": "/api/customers/1374184902",
+  "errors": [
+    {
+      "path": null,
+      "value": null,
+      "errorCode": "either mobile or email is required"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "timestamp": "REPLACED",
+  "status": 422,
+  "error": "Unprocessable Entity",
+  "path": "/api/customers/1374184902",
+  "errors": [
+    {
+      "path": "maturityInterval",
+      "value": null,
+      "errorCode": "must not be null"
+    }, {
+      "path": "name",
+      "value": null,
+      "errorCode": "must not be null"
+    }
+  ]
+}

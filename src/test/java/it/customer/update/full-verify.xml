@@ -1,0 +1,17 @@
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../../dataset.xsd">
+
+	<!--other-->
+	<customers id="1374184901" version="@auto"/>
+
+	<!--updated-->
+	<customers id="1374184902" version="124"
+	           name="name 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345"
+	           tax_number="taxNumber 1234" maturity_interval="3421" mobile="mobile 12345678901234567890123"
+	           email="email 12345678901234567890123456789012345678901234"
+	           web="web 1234567890123456789012345678901234567890123456" updated="@timestamp"/>
+
+	<!--existing Tax no-->
+	<customers id="1374184903" version="@auto"/>
+
+</dataset>
