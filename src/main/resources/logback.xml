@@ -3,4 +3,9 @@
 
 	<logger name="com.github.ivos.lightairspringsample" level="debug"/>
 
+	<!--debug SQL statements-->
+	<!--<logger name="org.hibernate.SQL" level="debug" />-->
+	<!--debug SQL arguments-->
+	<!--<logger name="org.hibernate" level="trace" />-->
+
 </configuration>

@@ -15,10 +15,12 @@ import static it.support.Matchers.patternMatch;
 @Verify
 public class CreateCustomerIT {
 
+	private static final String PATH = "/api/customers";
+
 	private void ok(String request) {
 		RestClient.from(this)
 				.requestName(request)
-				.post("/api/customers")
+				.post(PATH)
 				.emptyResponse()
 				.statusCode(HttpStatus.SC_CREATED)
 				.location(patternMatch("^[0-9]+$"));
@@ -37,7 +39,7 @@ public class CreateCustomerIT {
 	private void validation(String request) {
 		RestClient.from(this)
 				.requestName(request)
-				.post("/api/customers")
+				.post(PATH)
 				.responseName(request, ctx -> ctx.set("$.timestamp", "REPLACED"))
 				.statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY);
 	}
