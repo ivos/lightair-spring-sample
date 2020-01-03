@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
@@ -28,5 +29,14 @@ public class ExceptionHandler {
 		errorResponse.setError(status.getReasonPhrase());
 		errorResponse.setPath(request.getRequestURI());
 		return errorResponse;
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler(EntityNotFoundException.class)
+	@ResponseBody
+	ResponseEntity<ErrorResponse> handle(HttpServletRequest request, EntityNotFoundException exception) {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		ErrorResponse errorResponse = createErrorResponse(request, status);
+		errorResponse.setError("Not Found");
+		return new ResponseEntity<>(errorResponse, status);
 	}
 }

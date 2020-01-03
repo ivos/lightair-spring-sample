@@ -1,7 +1,6 @@
 package com.github.ivos.lightairspringsample.customer;
 
 import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoCreate;
-import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoList;
 import com.github.ivos.lightairspringsample.validation.Validation;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -45,8 +45,13 @@ public class CustomerService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<CustomerDtoList> list(String search) {
-		List<Customer> customers = repo.list(search, PageRequest.of(0, LIST_ROW_COUNT));
-		return mapper.mapAsList(customers, CustomerDtoList.class);
+	public List<Customer> list(String search) {
+		return repo.list(search, PageRequest.of(0, LIST_ROW_COUNT));
+	}
+
+	@Transactional(readOnly = true)
+	public Customer get(Long id) {
+		return repo.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Customer id " + id + " not found"));
 	}
 }

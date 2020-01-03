@@ -1,0 +1,20 @@
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../../dataset.xsd">
+
+	<!--other-->
+	<customers id="1374184901" version="@auto" name="@auto" tax_number="@auto" maturity_interval="@auto" mobile="@auto"
+	           email="@auto" web="@auto" updated="@auto"/>
+
+	<!--full-->
+	<customers id="1374184902" version="122" name="@auto" tax_number="@auto" maturity_interval="@auto" mobile="@auto"
+	           email="@auto" web="@auto" updated="@auto"/>
+
+	<!--minimal mobile-->
+	<customers id="1374184903" version="123" name="@auto" tax_number="@null" maturity_interval="@auto" mobile="@auto"
+	           email="@null" web="@null" updated="@auto"/>
+
+	<!--minimal email-->
+	<customers id="1374184904" version="124" name="@auto" tax_number="@null" maturity_interval="@auto" mobile="@null"
+	           email="@auto" web="@null" updated="@auto"/>
+
+</dataset>
