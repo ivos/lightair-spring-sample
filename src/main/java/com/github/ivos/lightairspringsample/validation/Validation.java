@@ -3,9 +3,10 @@ package com.github.ivos.lightairspringsample.validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class Validation {
@@ -15,24 +16,19 @@ public class Validation {
 
 	/**
 	 * Perform bean validations (JSR-303).
-	 *
-	 * @param validationErrors validation errors
-	 * @param data             bean to be validated, annotated with JSR-303 annotations
-	 */
-	public void validateBean(ValidationErrors validationErrors, Object data) {
-		processViolations(validationErrors, validator.validate(data));
-	}
-
-	/**
-	 * Perform bean validations (JSR-303).
 	 * <p>
 	 * Calls verify method to stop processing.
 	 *
 	 * @param data bean to be validated, annotated with JSR-303 annotations
 	 */
 	public void verifyBean(Object data) {
-		ValidationErrors validationErrors = new ValidationErrors();
-		validateBean(validationErrors, data);
+		List<ValidationError> validationErrors = validator.validate(data).stream()
+				.map(violation -> new ValidationError(
+						violation.getPropertyPath().toString(),
+						violation.getInvalidValue(),
+						violation.getMessage()))
+				.sorted()
+				.collect(Collectors.toList());
 		verify(validationErrors);
 	}
 
@@ -44,9 +40,7 @@ public class Validation {
 	 * @param validationError validation error
 	 */
 	public void reject(ValidationError validationError) {
-		ValidationErrors validationErrors = new ValidationErrors();
-		validationErrors.add(validationError);
-		verify(validationErrors);
+		verify(Collections.singletonList(validationError));
 	}
 
 	/**
@@ -54,18 +48,11 @@ public class Validation {
 	 * <p>
 	 * If there are any errors, throw {@link ValidationException}.
 	 *
-	 * @param validationErrors errors holder
+	 * @param validationErrors validation errors
 	 */
-	public void verify(ValidationErrors validationErrors) {
-		validationErrors.verify();
-	}
-
-	private void processViolations(ValidationErrors validationErrors, Set<ConstraintViolation<Object>> violations) {
-		violations.stream()
-				.map(violation -> new ValidationError(
-						violation.getPropertyPath().toString(),
-						violation.getInvalidValue(),
-						violation.getMessage()))
-				.forEach(validationErrors::add);
+	public void verify(List<ValidationError> validationErrors) {
+		if (!validationErrors.isEmpty()) {
+			throw new ValidationException(validationErrors);
+		}
 	}
 }
