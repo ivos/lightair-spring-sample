@@ -5,9 +5,16 @@
   "path": "/api/customers/1374184902",
   "errors": [
     {
-      "path": null,
-      "value": null,
-      "errorCode": "either mobile or email is required"
+      "path": "",
+      "value": {
+        "name": "n",
+        "taxNumber": null,
+        "maturityInterval": 0,
+        "mobile": null,
+        "email": null,
+        "web": null
+      },
+      "errorCode": "customer mobile or email required"
     }
   ]
 }

@@ -11,6 +11,9 @@ create table customers (
 );
 
 alter table customers
+  add constraint cc_customers_name check (length(name) >= 1);
+
+alter table customers
   add constraint uc_customers_tax_no unique (tax_number);
 
 alter table customers
@@ -18,6 +21,15 @@ alter table customers
 
 alter table customers
   add constraint cc_customers_maturity check (maturity_interval >= 0);
+
+alter table customers
+  add constraint cc_customers_mobile check (mobile is null or length(mobile) >= 1);
+
+alter table customers
+  add constraint cc_customers_email check (email is null or length(email) >= 1);
+
+alter table customers
+  add constraint cc_customers_web check (web is null or length(web) >= 1);
 
 alter table customers
   add constraint cc_customers_mobile_email check (mobile is not null or email is not null);

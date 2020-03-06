@@ -28,26 +28,16 @@ public class CustomerService {
 	private Validation validation;
 
 	@Autowired
-	private CustomerMobileOrEmailValidator customerMobileOrEmailValidator;
-
-	@Autowired
-	private CustomerDuplicateTaxNoWrapper customerDuplicateTaxNoWrapper;
-
-	@Autowired
 	private EntityManager entityManager;
 
 	@Transactional
 	public Customer create(CustomerDtoUpdate dto) {
 		validation.verifyBean(dto);
 		Customer customer = mapper.map(dto, Customer.class);
-		customerMobileOrEmailValidator.validate(customer);
 
 		customer.setUpdated(LocalDateTime.now());
 
-		return customerDuplicateTaxNoWrapper.wrap(
-				customer,
-				() -> repo.saveAndFlush(customer)
-		);
+		return repo.saveAndFlush(customer);
 	}
 
 	@Transactional(readOnly = true)
@@ -66,19 +56,12 @@ public class CustomerService {
 		validation.verifyBean(dto);
 		Customer customer = get(id);
 		mapper.map(dto, customer);
-		customerMobileOrEmailValidator.validate(customer);
 
 		customer.setUpdated(LocalDateTime.now());
 
 		entityManager.detach(customer);
 		customer.setVersion(version);
-		customerDuplicateTaxNoWrapper.wrap(
-				customer,
-				() -> {
-					entityManager.merge(customer);
-					repo.flush();
-					return null;
-				}
-		);
+		entityManager.merge(customer);
+		repo.flush();
 	}
 }

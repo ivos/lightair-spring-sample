@@ -2,6 +2,7 @@ package com.github.ivos.lightairspringsample.customer;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.ScriptAssert;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,9 @@ import java.time.LocalDateTime;
 @Table(name = "customers")
 @Data
 @EqualsAndHashCode(of = "id")
+@ScriptAssert(lang = "javascript",
+		script = "_this.mobile !== null || _this.email !== null",
+		message = "customer mobile or email required")
 public class Customer {
 
 	@Id
@@ -31,7 +35,7 @@ public class Customer {
 	@Size(min = 1, max = 100)
 	private String name;
 
-	@Size(min = 4, max = 100)
+	@Size(min = 4, max = 14)
 	private String taxNumber;
 
 	@NotNull

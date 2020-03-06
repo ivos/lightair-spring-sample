@@ -1,17 +1,17 @@
 package com.github.ivos.lightairspringsample.customer.dto;
 
-import lombok.ToString;
+import lombok.Data;
 
 import java.time.ZonedDateTime;
 
-@ToString
+@Data
 public class CustomerDtoDetail {
 
-	public String name;
-	public String taxNumber;
-	public Integer maturityInterval;
-	public String mobile;
-	public String email;
-	public String web;
-	public ZonedDateTime updated;
+	private String name;
+	private String taxNumber;
+	private Integer maturityInterval;
+	private String mobile;
+	private String email;
+	private String web;
+	private ZonedDateTime updated;
 }

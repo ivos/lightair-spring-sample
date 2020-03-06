@@ -1,6 +1,10 @@
 package com.github.ivos.lightairspringsample.config;
 
+import com.github.ivos.lightairspringsample.validation.DataIntegrityExceptionHandler;
+import com.github.ivos.lightairspringsample.validation.ValidationError;
 import com.github.ivos.lightairspringsample.validation.ValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,19 +13,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.OptimisticLockException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @ControllerAdvice("com.github.ivos.lightairspringsample")
 public class ExceptionHandler {
 
-	@org.springframework.web.bind.annotation.ExceptionHandler({ValidationException.class})
-	@ResponseBody
-	ResponseEntity<ErrorResponse> handle(HttpServletRequest request, ValidationException exception) {
-		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
-		ErrorResponse errorResponse = createErrorResponse(request, status);
-		errorResponse.setErrors(exception.getValidationErrors());
-		return new ResponseEntity<>(errorResponse, status);
-	}
+	@Autowired
+	private List<DataIntegrityExceptionHandler> dataIntegrityExceptionHandlers;
 
 	private ErrorResponse createErrorResponse(HttpServletRequest request, HttpStatus status) {
 		ErrorResponse errorResponse = new ErrorResponse();
@@ -30,6 +31,29 @@ public class ExceptionHandler {
 		errorResponse.setError(status.getReasonPhrase());
 		errorResponse.setPath(request.getRequestURI());
 		return errorResponse;
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler(ValidationException.class)
+	@ResponseBody
+	ResponseEntity<ErrorResponse> handle(HttpServletRequest request, ValidationException exception) {
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		ErrorResponse errorResponse = createErrorResponse(request, status);
+		errorResponse.setErrors(exception.getValidationErrors());
+		return new ResponseEntity<>(errorResponse, status);
+	}
+
+	@org.springframework.web.bind.annotation.ExceptionHandler(DataIntegrityViolationException.class)
+	@ResponseBody
+	ResponseEntity<ErrorResponse> handle(HttpServletRequest request, DataIntegrityViolationException exception) {
+		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		ErrorResponse errorResponse = createErrorResponse(request, status);
+		ValidationError validationError = dataIntegrityExceptionHandlers.stream()
+				.map(handler -> handler.handle(exception))
+				.filter(Objects::nonNull)
+				.findFirst()
+				.orElse(new ValidationError(null, null, exception.getMostSpecificCause().getMessage()));
+		errorResponse.setErrors(Collections.singletonList(validationError));
+		return new ResponseEntity<>(errorResponse, status);
 	}
 
 	@org.springframework.web.bind.annotation.ExceptionHandler(EntityNotFoundException.class)

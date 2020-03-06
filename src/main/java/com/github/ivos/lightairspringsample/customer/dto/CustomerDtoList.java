@@ -1,12 +1,12 @@
 package com.github.ivos.lightairspringsample.customer.dto;
 
-import lombok.ToString;
+import lombok.Data;
 
-@ToString
+@Data
 public class CustomerDtoList {
 
-	public String name;
-	public String taxNumber;
-	public String mobile;
-	public String email;
+	private String name;
+	private String taxNumber;
+	private String mobile;
+	private String email;
 }

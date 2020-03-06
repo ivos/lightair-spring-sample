@@ -5,6 +5,17 @@
   "path": "/api/customers/1374184902",
   "errors": [
     {
+      "path": "",
+      "value": {
+        "name": null,
+        "taxNumber": null,
+        "maturityInterval": null,
+        "mobile": null,
+        "email": null,
+        "web": null
+      },
+      "errorCode": "customer mobile or email required"
+    }, {
       "path": "maturityInterval",
       "value": null,
       "errorCode": "must not be null"

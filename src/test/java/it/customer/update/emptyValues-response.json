@@ -19,7 +19,7 @@
     }, {
       "path": "taxNumber",
       "value": "",
-      "errorCode": "size must be between 4 and 100"
+      "errorCode": "size must be between 4 and 14"
     }, {
       "path": "web",
       "value": "",

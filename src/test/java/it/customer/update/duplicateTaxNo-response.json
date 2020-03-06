@@ -6,7 +6,7 @@
   "errors": [
     {
       "path": "taxNumber",
-      "value": "existing",
+      "value": null,
       "errorCode": "duplicate"
     }
   ]
