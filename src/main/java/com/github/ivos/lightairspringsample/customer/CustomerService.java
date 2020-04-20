@@ -1,5 +1,6 @@
 package com.github.ivos.lightairspringsample.customer;
 
+import com.github.ivos.lightairspringsample.config.Logged;
 import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoUpdate;
 import com.github.ivos.lightairspringsample.time.TimeService;
 import com.github.ivos.lightairspringsample.validation.Validation;
@@ -16,6 +17,7 @@ import java.util.List;
 import static com.github.ivos.lightairspringsample.utils.Constants.LIST_ROW_COUNT;
 
 @Service
+@Logged
 public class CustomerService {
 
 	private final CustomerRepository repo;

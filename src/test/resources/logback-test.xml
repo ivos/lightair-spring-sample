@@ -6,7 +6,7 @@
 		<appender-ref ref="FILE"/>
 	</root>
 
-	<logger name="com.github.ivos.lightairspringsample" level="debug"/>
+	<logger name="com.github.ivos.lightairspringsample" level="trace"/>
 
 	<!--<logger name="net.sf.lightair" level="info"/>-->
 

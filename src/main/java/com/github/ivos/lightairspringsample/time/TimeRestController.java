@@ -1,5 +1,6 @@
 package com.github.ivos.lightairspringsample.time;
 
+import com.github.ivos.lightairspringsample.config.Logged;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/test-api/time")
 @Profile("test")
+@Logged(Logged.LogLevel.info)
 public class TimeRestController {
 
 	@RequestMapping(method = RequestMethod.PUT)

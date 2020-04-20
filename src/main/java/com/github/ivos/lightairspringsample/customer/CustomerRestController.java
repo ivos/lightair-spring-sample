@@ -1,9 +1,9 @@
 package com.github.ivos.lightairspringsample.customer;
 
+import com.github.ivos.lightairspringsample.config.Logged;
 import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoDetail;
 import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoList;
 import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoUpdate;
-import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +25,7 @@ import static com.github.ivos.lightairspringsample.utils.RestUtils.version;
 
 @RestController
 @RequestMapping("/api/customers")
-@Slf4j
+@Logged(Logged.LogLevel.info)
 public class CustomerRestController {
 
 	private final CustomerService customerService;
@@ -39,7 +39,6 @@ public class CustomerRestController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> create(
 			@RequestBody CustomerDtoUpdate dto) {
-		log.info("Create customer, {}", dto);
 		Customer customer = customerService.create(dto);
 		return ResponseEntity
 				.created(location(customer.getId()))
@@ -49,7 +48,6 @@ public class CustomerRestController {
 	@RequestMapping(method = RequestMethod.GET)
 	public List<CustomerDtoList> list(
 			@RequestParam(name = "search", required = false) String search) {
-		log.info("List customers, search: {}", search);
 		List<Customer> customers = customerService.list(search);
 		return mapper.mapAsList(customers, CustomerDtoList.class);
 	}
@@ -57,7 +55,6 @@ public class CustomerRestController {
 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<CustomerDtoDetail> get(
 			@PathVariable(name = "id") Long id) {
-		log.info("Get customer, id: {}", id);
 		Customer customer = customerService.get(id);
 		CustomerDtoDetail dto = mapper.map(customer, CustomerDtoDetail.class);
 		return ResponseEntity
@@ -72,7 +69,6 @@ public class CustomerRestController {
 			@PathVariable(name = "id") Long id,
 			@RequestHeader(name = HttpHeaders.IF_MATCH, required = false) String ifMatch,
 			@RequestBody CustomerDtoUpdate dto) {
-		log.info("Update customer, id {}, ifMatch {}, {}", id, ifMatch, dto);
 		customerService.update(id, version(ifMatch), dto);
 	}
 }

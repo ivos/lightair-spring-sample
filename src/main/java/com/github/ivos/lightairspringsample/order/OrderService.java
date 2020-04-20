@@ -1,5 +1,6 @@
 package com.github.ivos.lightairspringsample.order;
 
+import com.github.ivos.lightairspringsample.config.Logged;
 import com.github.ivos.lightairspringsample.customer.Customer;
 import com.github.ivos.lightairspringsample.customer.CustomerRepository;
 import com.github.ivos.lightairspringsample.order.dto.OrderDtoCreate;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 @Service
+@Logged
 public class OrderService {
 
 	private final OrderRepository repo;

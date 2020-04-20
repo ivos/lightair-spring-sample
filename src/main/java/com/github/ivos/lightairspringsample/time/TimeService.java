@@ -1,5 +1,6 @@
 package com.github.ivos.lightairspringsample.time;
 
+import com.github.ivos.lightairspringsample.config.Logged;
 import org.springframework.stereotype.Service;
 
 import javax.validation.ClockProvider;
@@ -8,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @Service
+@Logged
 public class TimeService implements ClockProvider {
 
 	private static Clock clock;

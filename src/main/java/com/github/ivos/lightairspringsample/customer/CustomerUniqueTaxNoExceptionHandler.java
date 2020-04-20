@@ -1,11 +1,13 @@
 package com.github.ivos.lightairspringsample.customer;
 
+import com.github.ivos.lightairspringsample.config.Logged;
 import com.github.ivos.lightairspringsample.validation.DataIntegrityExceptionHandler;
 import com.github.ivos.lightairspringsample.validation.ValidationError;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 @Component
+@Logged
 public class CustomerUniqueTaxNoExceptionHandler implements DataIntegrityExceptionHandler {
 
 	@Override

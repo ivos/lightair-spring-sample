@@ -1,9 +1,11 @@
 package com.github.ivos.lightairspringsample.order_number;
 
+import com.github.ivos.lightairspringsample.config.Logged;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Logged
 public class OrderNumberService {
 
 	private final OrderNumberRepository repo;
