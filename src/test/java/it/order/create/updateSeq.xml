@@ -1,0 +1,9 @@
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../../dataset.xsd">
+
+	<order_numbers year="2019" version="@auto" last_sequence="@auto"/>
+	<!--updated-->
+	<order_numbers year="2020" version="123" last_sequence="234"/>
+	<order_numbers year="2021" version="@auto" last_sequence="@auto"/>
+
+</dataset>

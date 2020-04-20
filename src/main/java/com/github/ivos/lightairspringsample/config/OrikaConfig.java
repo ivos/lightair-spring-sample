@@ -1,5 +1,7 @@
 package com.github.ivos.lightairspringsample.config;
 
+import com.github.ivos.lightairspringsample.order.Order;
+import com.github.ivos.lightairspringsample.order.dto.OrderDtoCreate;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.MappingContext;
@@ -35,6 +37,14 @@ public class OrikaConfig {
 		converterFactory.registerConverter(new ZonedDateTimeToLocalDateTimeConverter());
 	}
 
+	@PostConstruct
+	public void registerMappings() {
+		mapperFactory().classMap(OrderDtoCreate.class, Order.class)
+				.field("customerId", "customer.id")
+				.byDefault()
+				.register();
+	}
+
 	private class ZonedDateTimeToLocalDateTimeConverter
 			extends BidirectionalConverter<ZonedDateTime, LocalDateTime> {
 		@Override
@@ -50,4 +60,3 @@ public class OrikaConfig {
 		}
 	}
 }
-

@@ -1,0 +1,10 @@
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../../dataset.xsd">
+
+	<!--created-->
+	<orders id="@any" version="0" customer_id="1374184902" order_number="PO-2020-00001" due_date="2020-04-20"
+	        status="created" comment_="@null" created="@timestamp" updated="@timestamp"/>
+
+	<order_numbers year="2020" version="0" last_sequence="1"/>
+
+</dataset>

@@ -5,7 +5,6 @@ import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoList;
 import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoUpdate;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,11 +28,13 @@ import static com.github.ivos.lightairspringsample.utils.RestUtils.version;
 @Slf4j
 public class CustomerRestController {
 
-	@Autowired
-	private CustomerService customerService;
+	private final CustomerService customerService;
+	private final MapperFacade mapper;
 
-	@Autowired
-	private MapperFacade mapper;
+	public CustomerRestController(CustomerService customerService, MapperFacade mapper) {
+		this.customerService = customerService;
+		this.mapper = mapper;
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> create(

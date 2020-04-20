@@ -1,0 +1,21 @@
+{
+  "timestamp": "REPLACED",
+  "status": 422,
+  "error": "Unprocessable Entity",
+  "path": "/api/orders",
+  "errors": [
+    {
+      "path": "customerId",
+      "value": null,
+      "errorCode": "must not be null"
+    }, {
+      "path": "dueDate",
+      "value": null,
+      "errorCode": "must not be null"
+    }, {
+      "path": "orderItems",
+      "value": null,
+      "errorCode": "must not be null"
+    }
+  ]
+}

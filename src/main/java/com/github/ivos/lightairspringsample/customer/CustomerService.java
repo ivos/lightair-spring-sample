@@ -1,9 +1,9 @@
 package com.github.ivos.lightairspringsample.customer;
 
 import com.github.ivos.lightairspringsample.customer.dto.CustomerDtoUpdate;
+import com.github.ivos.lightairspringsample.time.TimeService;
 import com.github.ivos.lightairspringsample.validation.Validation;
 import ma.glasnost.orika.MapperFacade;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,24 +18,27 @@ import static com.github.ivos.lightairspringsample.utils.Constants.LIST_ROW_COUN
 @Service
 public class CustomerService {
 
-	@Autowired
-	private CustomerRepository repo;
+	private final CustomerRepository repo;
+	private final MapperFacade mapper;
+	private final Validation validation;
+	private final EntityManager entityManager;
 
-	@Autowired
-	private MapperFacade mapper;
-
-	@Autowired
-	private Validation validation;
-
-	@Autowired
-	private EntityManager entityManager;
+	public CustomerService(CustomerRepository repo, MapperFacade mapper, Validation validation,
+			EntityManager entityManager) {
+		this.repo = repo;
+		this.mapper = mapper;
+		this.validation = validation;
+		this.entityManager = entityManager;
+	}
 
 	@Transactional
 	public Customer create(CustomerDtoUpdate dto) {
+		LocalDateTime now = TimeService.now();
+
 		validation.verifyBean(dto);
 		Customer customer = mapper.map(dto, Customer.class);
 
-		customer.setUpdated(LocalDateTime.now());
+		customer.setUpdated(now);
 
 		return repo.saveAndFlush(customer);
 	}
@@ -53,11 +56,13 @@ public class CustomerService {
 
 	@Transactional
 	public void update(Long id, Long version, CustomerDtoUpdate dto) {
+		LocalDateTime now = TimeService.now();
+
 		validation.verifyBean(dto);
 		Customer customer = get(id);
 		mapper.map(dto, customer);
 
-		customer.setUpdated(LocalDateTime.now());
+		customer.setUpdated(now);
 
 		entityManager.detach(customer);
 		customer.setVersion(version);

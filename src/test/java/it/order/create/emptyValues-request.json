@@ -1,0 +1,12 @@
+{
+  "customerId": 1374184902,
+  "dueDate": "2020-04-20",
+  "comment": "",
+  "orderItems": [
+    {
+      "product": "",
+      "unitPrice": -0.01,
+      "quantity": 0
+    }
+  ]
+}

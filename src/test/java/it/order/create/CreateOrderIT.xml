@@ -1,0 +1,12 @@
+<dataset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../../dataset.xsd">
+
+	<customers id="1374184901" version="@auto" name="@auto" tax_number="@auto" maturity_interval="@auto" mobile="@auto"
+	           email="@auto" web="@auto" updated="@auto"/>
+	<customers id="1374184902" version="@auto" name="@auto" tax_number="@auto" maturity_interval="@auto" mobile="@auto"
+	           email="@auto" web="@auto" updated="@auto"/>
+
+	<orders/>
+	<order_numbers/>
+
+</dataset>

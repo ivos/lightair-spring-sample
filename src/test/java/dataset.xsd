@@ -7,6 +7,9 @@
 			<xsd:choice minOccurs="0" maxOccurs="unbounded">
 				<xsd:element name="customers" type="customers__Type"/>
 				<xsd:element name="flyway_schema_history" type="flyway_schema_history__Type"/>
+				<xsd:element name="order_items" type="order_items__Type"/>
+				<xsd:element name="order_numbers" type="order_numbers__Type"/>
+				<xsd:element name="orders" type="orders__Type"/>
 			</xsd:choice>
 		</xsd:complexType>
 	</xsd:element>
@@ -33,5 +36,28 @@
 		<xsd:attribute name="installed_on" use="optional" type="la:TimestampType"/>
 		<xsd:attribute name="execution_time" use="optional" type="la:IntegerType"/>
 		<xsd:attribute name="success" use="optional" type="la:BooleanType"/>
+	</xsd:complexType>
+	<xsd:complexType name="order_items__Type">
+		<xsd:attribute name="id" use="optional" type="la:LongType"/>
+		<xsd:attribute name="order_id" use="optional" type="la:LongType"/>
+		<xsd:attribute name="product" use="optional" type="la:StringType"/>
+		<xsd:attribute name="unit_price" use="optional" type="la:BigdecimalType"/>
+		<xsd:attribute name="quantity" use="optional" type="la:BigdecimalType"/>
+	</xsd:complexType>
+	<xsd:complexType name="order_numbers__Type">
+		<xsd:attribute name="year" use="optional" type="la:IntegerType"/>
+		<xsd:attribute name="version" use="optional" type="la:LongType"/>
+		<xsd:attribute name="last_sequence" use="optional" type="la:IntegerType"/>
+	</xsd:complexType>
+	<xsd:complexType name="orders__Type">
+		<xsd:attribute name="id" use="optional" type="la:LongType"/>
+		<xsd:attribute name="version" use="optional" type="la:LongType"/>
+		<xsd:attribute name="order_number" use="optional" type="la:StringType"/>
+		<xsd:attribute name="customer_id" use="optional" type="la:LongType"/>
+		<xsd:attribute name="due_date" use="optional" type="la:DateType"/>
+		<xsd:attribute name="status" use="optional" type="la:StringType"/>
+		<xsd:attribute name="comment_" use="optional" type="la:StringNullableType"/>
+		<xsd:attribute name="created" use="optional" type="la:TimestampType"/>
+		<xsd:attribute name="updated" use="optional" type="la:TimestampType"/>
 	</xsd:complexType>
 </xsd:schema>

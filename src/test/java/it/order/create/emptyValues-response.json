@@ -1,0 +1,25 @@
+{
+  "timestamp": "REPLACED",
+  "status": 422,
+  "error": "Unprocessable Entity",
+  "path": "/api/orders",
+  "errors": [
+    {
+      "path": "comment",
+      "value": "",
+      "errorCode": "size must be between 1 and 2147483647"
+    }, {
+      "path": "orderItems[0].product",
+      "value": "",
+      "errorCode": "size must be between 1 and 100"
+    }, {
+      "path": "orderItems[0].quantity",
+      "value": 0,
+      "errorCode": "must be greater than 0"
+    }, {
+      "path": "orderItems[0].unitPrice",
+      "value": -0.01,
+      "errorCode": "must be greater than or equal to 0"
+    }
+  ]
+}

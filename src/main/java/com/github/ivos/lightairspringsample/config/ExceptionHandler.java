@@ -3,7 +3,6 @@ package com.github.ivos.lightairspringsample.config;
 import com.github.ivos.lightairspringsample.validation.DataIntegrityExceptionHandler;
 import com.github.ivos.lightairspringsample.validation.ValidationError;
 import com.github.ivos.lightairspringsample.validation.ValidationException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +20,11 @@ import java.util.Objects;
 @ControllerAdvice("com.github.ivos.lightairspringsample")
 public class ExceptionHandler {
 
-	@Autowired
-	private List<DataIntegrityExceptionHandler> dataIntegrityExceptionHandlers;
+	private final List<DataIntegrityExceptionHandler> dataIntegrityExceptionHandlers;
+
+	public ExceptionHandler(List<DataIntegrityExceptionHandler> dataIntegrityExceptionHandlers) {
+		this.dataIntegrityExceptionHandlers = dataIntegrityExceptionHandlers;
+	}
 
 	private ErrorResponse createErrorResponse(HttpServletRequest request, HttpStatus status) {
 		ErrorResponse errorResponse = new ErrorResponse();
