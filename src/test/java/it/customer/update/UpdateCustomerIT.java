@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(LightAir.class)
-@Setup
+@Setup.List({@Setup("../../delete-all.xml"), @Setup})
 @Verify
 public class UpdateCustomerIT {
 

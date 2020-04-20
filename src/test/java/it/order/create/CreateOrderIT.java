@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
 import static it.support.Matchers.patternMatch;
 
 @RunWith(LightAir.class)
-@Setup
+@Setup.List({@Setup("../../delete-all.xml"), @Setup})
 @Verify
 public class CreateOrderIT {
 

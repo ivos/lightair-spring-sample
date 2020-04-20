@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(LightAir.class)
-@Setup
+@Setup.List({@Setup("../../delete-all.xml"), @Setup})
 public class GetCustomerIT {
 
 	private String getPath(Long id) {
